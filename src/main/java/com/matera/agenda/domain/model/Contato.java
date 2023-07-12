@@ -18,6 +18,10 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Contato {
+	
+	public Contato() {
+		
+	}
 
 	@EqualsAndHashCode.Include
 	@Id

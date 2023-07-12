@@ -21,7 +21,9 @@ import com.matera.agenda.domain.repository.ContatoRepository;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping("/contatos")
@@ -33,6 +35,13 @@ public class ContatoController {
 	// Read
 	@GetMapping
 	public List<Contato> listar() {
+		
+		log.trace("Testando TRACE log");
+		log.debug("Testando DEBUG log");
+		log.info("Testando INFO log");
+		log.warn("Testando WARN log");
+		log.error("Testando ERROR log");
+		
 		return contatoRepository.findAll();
 	}
 
@@ -70,6 +79,7 @@ public class ContatoController {
 	public ResponseEntity<Void> remover(@PathVariable Long contatoId) {
 		if (!contatoRepository.existsById(contatoId)) {
 			//return ResponseEntity.notFound().build();
+			log.error("Usuário {} não foi encontrado para deleção" , contatoId);
 			throw new UsuarioNaoEncontradoException(contatoId);
 		}
 
